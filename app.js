@@ -4,20 +4,20 @@ $(function(){
     $('.js-text-input-form').submit(function(e){
         //prevents default form behavior
         e.preventDefault();
-        // alert("here");
+        
         var userInput = $('.js-text-input').val();
-        // console.log(userInput);
-        // var userInputArr = userInput.split(" ");
-        // console.log(userInputArr);
+        
         var subString = divideString(userInput);
-        console.log(subString);
+        // console.log(subString);
         var stringCount = totalWordCount(subString);
-        console.log(stringCount);
+        // console.log(stringCount);
         var avgWordLength = averageWordLength(subString);
-        console.log(avgWordLength);
+        // console.log(avgWordLength);
 
         var filtered = wordsThatAreNotUnique(subString);
         console.log(filtered);
+
+        showResults(stringCount, filtered, avgWordLength);
     });
 })
 
@@ -45,14 +45,6 @@ function divideString(userInput){
         avgWordLength = total / totalWordCount(stringArray);
         return avgWordLength;
     };
-
-    // function lowerCase(stringArray){
-    //     var lowerCaseArray = [];
-    //     for(var i = 0; i < stringArray.length; i++){
-    //         lowerCaseArray.push(stringArray[i].toLowerCase());
-    //     }
-    //     return lowerCaseArray;
-    // }
 
     function wordsThatAreNotUnique(stringArray){
         var notUnique = [
@@ -86,4 +78,12 @@ function divideString(userInput){
         }
         
         return countUniqueWords;
+    }
+
+    function showResults(count, unique, avg){
+        $(".text-report").removeClass("hidden");
+        console.log(count);
+        $('.js-word-count').text(count);
+        $('.js-unique-count').text(unique);
+        $('.js-avg').text(avg);
     }
