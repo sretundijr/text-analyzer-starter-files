@@ -13,6 +13,8 @@ $(function(){
         console.log(stringCount);
         var avgWordLength = averageWordLength(subString);
         console.log(avgWordLength);
+        var lowerCaseArray = lowerCase(subString);
+        console.log(lowerCaseArray);
     });
 
     function divideString(userInput){
@@ -36,4 +38,12 @@ $(function(){
         avgWordLength = total / totalWordCount(stringArray);
         return avgWordLength;
     };
+
+    function lowerCase(stringArray){
+        var lowerCaseArray = [];
+        for(var i = 0; i < stringArray.length; i++){
+            lowerCaseArray.push(stringArray[i].toLowerCase());
+        }
+        return lowerCaseArray;
+    }
 })
