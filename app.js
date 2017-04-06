@@ -6,9 +6,10 @@ $(function(){
         e.preventDefault();
         
         var userInput = $('.js-text-input').val();
+        //.replace(/\r?\n|\r/g, "");
         
         var subString = divideString(userInput);
-        // console.log(subString);
+        console.log(subString);
         var stringCount = totalWordCount(subString);
         // console.log(stringCount);
         var avgWordLength = averageWordLength(subString);
@@ -24,8 +25,12 @@ $(function(){
 function divideString(userInput){
         var subString = userInput.toLowerCase()
             .split(/[\s\r*,\(\)]+/);
+            // .split(/\b/g);
             //work around
-            subString.pop();
+            if(subString[subString.length - 1] === ""){
+                subString.pop();
+            }
+
         return subString;
     }
 
