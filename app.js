@@ -5,6 +5,7 @@ $(function(){
         //prevents default form behavior
         e.preventDefault();
         
+        //tried a few differnt methods to eliminate the empty string bug
         var userInput = $('.js-text-input').val();
         //.replace(/\r?\n|\r/g, "");
         
@@ -26,7 +27,10 @@ function divideString(userInput){
         var subString = userInput.toLowerCase()
             .split(/[\s\r*,\(\)]+/);
             // .split(/\b/g);
-            //work around
+            //work around, when there is multiply carriage returns I found that 
+            //the last index of my array would contain an empty string
+            //this determines whether the last index contains an empty string
+            //and removes it
             if(subString[subString.length - 1] === ""){
                 subString.pop();
             }
@@ -40,7 +44,6 @@ function divideString(userInput){
 
     function averageWordLength(stringArray){
         //declare locals to calc avg length
-        var currentWordLength = 0;
         var avgWordLength = 0;
         var total = 0;
         //loop through the array of strings to calc avg
@@ -58,17 +61,10 @@ function divideString(userInput){
             'and',
             'on'
         ];
-        console.log(notUnique);
-        // for(var i = 0; i < stringArray.length; i++){
-        //     var filteredArray = stringArray.find(function(notUnique){
-        //         return stringArray !== notUnique;
-        //     });
-        // }
-        // var isUnique;
+   
         var countUniqueWords = 0;
         for(var i = 0; i < stringArray.length; i++){
             var counter = 0;
-            // isUnique = false;
             for(var j = 0; j < notUnique.length; j++){
                 // console.log(stringArray[i]);
                 // console.log(notUnique[j])
@@ -77,7 +73,6 @@ function divideString(userInput){
                 }
             }
             if(counter === 0){
-                // isUnique = true;
                 countUniqueWords++;
             }
         }
